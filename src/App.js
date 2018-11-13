@@ -14,37 +14,24 @@ class App extends Component {
     console.log("this is;", this)
     fetch(fetchLink)
       .then(response => response.json())
-      .then(data => this.setState({user: data.login, active: true}))
+      .then(data => this.setState({user: data, active: !this.state.active}))
   }
-
-  
 
   render() {
 
-    // const isLoggedIn = this.state.active;
-    // let button;
-
-    // if(isLoggedIn){
-      // return <greetingInfo />;
-        //}
-      // return <loginPrompt />
-        }
-    //  
-    
-    // separate component called greetingInfo that shows: 
-    // data.login
-    //   data.avatar_url
-    //   data.bio
-    //   data.followers_url
-    // }
-
-    // separate component called loginPrompt that shows: "Click to log in"
-
     return (
       <div className="App">
-        <header className="App-header">
-          <button onClick={this.handleClick}>Log In</button>
-        </header>
+      
+          <button onClick={this.handleClick}>Toggle User</button>
+        
+        {this.state.active ?
+          <div>{this.state.user.login}
+          <br />Followers: {this.state.user.followers} 
+          <br />Following: {this.state.user.following} 
+          <br /><img src={this.state.user.avatar_url} /></div> 
+
+        : 
+        <div>Logged Out</div> }
       </div>
     );
   }
